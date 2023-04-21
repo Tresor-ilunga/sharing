@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Link{% endblock %}
+
+{% block body %}
+    <h1>Link</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ link.id }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ link.url }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ link.slug }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ link.createdAt ? link.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ link.updatedAt ? link.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Visit_at</th>
+                <td>{{ link.visitAt ? link.visitAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_link_index') }}">back to list</a>
+
+    <a href="{{ path('app_link_edit', {'id': link.id}) }}">edit</a>
+
+    {{ include('link/_delete_form.html.twig') }}
+{% endblock %}
