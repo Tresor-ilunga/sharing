@@ -10,9 +10,8 @@ final class UpdateLinkMessage
     public string $slug;
 
     public function __construct(
-        public readonly Link $_entity
-    )
-    {
+        public readonly Link $_entity,
+    ) {
         $this->url = $this->_entity->getUrl();
         $this->slug = $this->_entity->getSlug();
     }

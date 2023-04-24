@@ -20,8 +20,7 @@ class LinkController extends AbstractController
 {
     public function __construct(
         private readonly MessageBusInterface $bus
-    )
-    {
+    ) {
     }
 
     #[Route('/', name: 'app_link_index', methods: ['GET'])]
@@ -33,15 +32,13 @@ class LinkController extends AbstractController
     }
 
     #[Route('/new', name: 'app_link_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, LinkRepository $linkRepository): Response
     {
         $message = new CreateLinkMessage();
-
         $form = $this->createForm(CreateLinkType::class, $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->bus->dispatch($message);
 
             return $this->redirectToRoute('app_link_index', [], Response::HTTP_SEE_OTHER);
@@ -65,7 +62,6 @@ class LinkController extends AbstractController
     public function edit(Request $request, Link $link, LinkRepository $linkRepository): Response
     {
         $message = new UpdateLinkMessage($link);
-
         $form = $this->createForm(UpdateLinkType::class, $message);
         $form->handleRequest($request);
 

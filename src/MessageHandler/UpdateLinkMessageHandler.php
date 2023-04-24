@@ -2,7 +2,6 @@
 
 namespace App\MessageHandler;
 
-use App\Entity\Link;
 use App\Message\UpdateLinkMessage;
 use App\Repository\LinkRepository;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -11,9 +10,8 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final class UpdateLinkMessageHandler
 {
     public function __construct(
-        private readonly LinkRepository $linkRepository
-    )
-    {
+        private readonly LinkRepository $repository
+    ) {
     }
 
     public function __invoke(UpdateLinkMessage $message): void
@@ -23,6 +21,6 @@ final class UpdateLinkMessageHandler
             ->setUrl($message->url)
             ->setSlug($message->slug);
 
-        $this->linkRepository->save($link, true);
+        $this->repository->save($link, true);
     }
 }

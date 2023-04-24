@@ -2,9 +2,7 @@
 
 namespace App\Command;
 
-use App\Entity\Link;
 use App\Message\CreateLinkMessage;
-use App\Repository\LinkRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -40,10 +38,10 @@ class CreateLinkCommand extends Command
         $url = strval($input->getArgument('url'));
         $slug = strval($input->getArgument('slug'));
 
-        $message = (new CreateLinkMessage($url, $slug));
+        $message = new CreateLinkMessage($url, $slug);
         $this->bus->dispatch($message);
 
-        $io->success('Link created !');
+        $io->success('Link created!');
 
         return Command::SUCCESS;
     }

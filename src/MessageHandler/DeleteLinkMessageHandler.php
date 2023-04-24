@@ -10,12 +10,12 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final class DeleteLinkMessageHandler
 {
     public function __construct(
-        private readonly LinkRepository $linkRepository
-    )
-    {}
+        private readonly LinkRepository $repository
+    ) {
+    }
 
     public function __invoke(DeleteLinkMessage $message): void
     {
-        $this->linkRepository->remove($message->_entity);
+        $this->repository->remove($message->_entity, true);
     }
 }

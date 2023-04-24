@@ -8,7 +8,6 @@ final class DeleteLinkMessage
 {
     public function __construct(
         public readonly Link $_entity,
-    )
-    {
+    ) {
     }
 }
