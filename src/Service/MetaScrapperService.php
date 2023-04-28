@@ -12,10 +12,12 @@ final class MetaScrapperService
     public function getLinkMeta(string $url): ?LinkMeta
     {
         try {
+
             $meta = (new Embed())->get($url);
+
             return LinkMeta::fromEmbed($meta);
-        } catch (\Throwable $e) {
-            return null;
+        }catch (\Throwable $e) {
+            dd($e);
         }
     }
 }

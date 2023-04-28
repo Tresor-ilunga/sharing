@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\ValueObject;
 
 use Doctrine\ORM\Mapping as ORM;
+use Embed\Extractor;
 
 #[ORM\Embeddable]
 class LinkMeta
@@ -25,5 +26,16 @@ class LinkMeta
     public static function default(): self
     {
         return new self();
+    }
+
+    public static function fromEmbed(Extractor $meta): self
+    {
+        return new self(
+            title: $meta->title,
+            description: $meta->description,
+            canonical_url: (string) $meta->url,
+            image: $meta->image?->_toString(),
+            favicon: (string) $meta->favicon,
+        );
     }
 }
